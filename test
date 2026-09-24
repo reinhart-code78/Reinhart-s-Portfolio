@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reinhart Jeep - UI/UX & Mobile App Developer Portfolio</title>
+  
+  <meta name="description" content="Portfolio & CMS Resmi Reinhart Jeep - UI/UX & Mobile Developer profesional yang berfokus pada aplikasi Android/iOS dan Web UI modern.">
+  <meta property="og:title" content="Reinhart Jeep - UI/UX & Mobile Developer Portfolio">
+  <meta property="og:description" content="Merancang dan membangun antarmuka seluler dan web yang simpel, indah, dan perfomant.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F0F9F8',
+              100: '#E2F2F0',
+              200: '#C5E5E1',
+              300: '#A3D2CA',
+              400: '#72B8AE',
+              500: '#4E8D88',
+              600: '#3A6F6B',
+              700: '#2C5E58',
+              800: '#1F433F',
+              900: '#142C2A',
+            },
+            pastelBg: '#FAF6F0',
+            pastelCard: '#F3ECE1',
+            darkBg: '#0F172A',
+            darkCard: '#1E293B',
+          },
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #FAF6F0;
+      color: #2D3748;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    .dark body, body.dark-mode {
+      background-color: #0F172A;
+      color: #F8FAFC;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF6F0;
+    }
+    .dark ::-webkit-scrollbar-track {
+      background: #0F172A;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #A3D2CA;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #4E8D88;
+    }
+
+    /* Hero Gradient */
+    .hero-gradient {
+      background: radial-gradient(100% 100% at 50% 0%, rgba(163, 210, 202, 0.3) 0%, rgba(250, 246, 240, 0.9) 100%);
+    }
+    .dark .hero-gradient, body.dark-mode .hero-gradient {
+      background: radial-gradient(100% 100% at 50% 0%, rgba(78, 141, 136, 0.25) 0%, rgba(15, 23, 42, 0.95) 100%);
+    }
+
+    /* Glassmorphism Header */
+    .glass-header {
+      background: rgba(250, 246, 240, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .dark .glass-header, body.dark-mode .glass-header {
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    /* Spotlight Card Effect */
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: inherit;
+      background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(163, 210, 202, 0.25), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .dark .spotlight-card::before, body.dark-mode .spotlight-card::before {
+      background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(78, 141, 136, 0.35), transparent 70%);
+    }
+    .spotlight-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Glow Pulse Avatar */
+    .avatar-glow {
+      box-shadow: 0 0 0 0 rgba(163, 210, 202, 0.7);
+      animation: pulseHighlight 3s infinite ease-in-out;
+    }
+    @keyframes pulseHighlight {
+      0% { box-shadow: 0 0 0 0 rgba(163, 210, 202, 0.7); }
+      70% { box-shadow: 0 0 0 18px rgba(163, 210, 202, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(163, 210, 202, 0); }
+    }
+
+    /* Text Accent Highlight */
+    .highlight-text-accent {
+      background: linear-gradient(120deg, rgba(163, 210, 202, 0.4) 0%, rgba(163, 210, 202, 0.85) 100%);
+      background-repeat: no-repeat;
+      background-size: 100% 35%;
+      background-position: 0 88%;
+      transition: background-size 0.3s ease;
+    }
+    .highlight-text-accent:hover {
+      background-size: 100% 85%;
+    }
+
+    /* Search Highlight Marker */
+    mark.search-highlight {
+      background-color: #fef08a;
+      color: #854d0e;
+      border-radius: 0.25rem;
+      padding: 0 0.25rem;
+      font-weight: 700;
+    }
+    .dark mark.search-highlight, body.dark-mode mark.search-highlight {
+      background-color: #854d0e;
+      color: #fef08a;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-300 selection:text-brand-900 transition-colors duration-300">
+
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-40 w-full glass-header border-b border-brand-300/20 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="text-2xl font-black tracking-tight text-brand-700 dark:text-brand-300 flex items-center gap-1 group">
+        <span class="highlight-text-accent">Reinhart Jeep</span><span class="text-brand-500 group-hover:scale-125 transition-transform inline-block">.</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-8 text-xs font-bold tracking-wide uppercase text-gray-700 dark:text-gray-300">
+        <a href="#about" class="hover:text-brand-600 dark:hover:text-brand-300 transition-colors">Tentang</a>
+        <a href="#services" class="hover:text-brand-600 dark:hover:text-brand-300 transition-colors">Layanan</a>
+        <a href="#experience" class="hover:text-brand-600 dark:hover:text-brand-300 transition-colors">Pengalaman</a>
+        <a href="#skills" class="hover:text-brand-600 dark:hover:text-brand-300 transition-colors">Keahlian</a>
+        <a href="#projects" class="hover:text-brand-600 dark:hover:text-brand-300 transition-colors">Proyek</a>
+        <a href="#hobbies" class="hover:text-brand-600 dark:hover:text-brand-300 transition-colors">Hobi</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3">
+        <!-- Theme Switcher -->
+        <button id="themeToggleBtn" onclick="toggleDarkMode()" class="p-2.5 text-brand-700 dark:text-brand-300 border border-brand-300/40 rounded-full hover:bg-brand-300/20 transition-all active:scale-95 shadow-sm" title="Beralih Mode Gelap/Terang">
+          <svg id="themeIconMoon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          <svg id="themeIconSun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        </button>
+
+        <!-- Admin CMS Button -->
+        <button id="adminBtn" onclick="toggleAdminModal()" class="px-3.5 py-2 text-xs font-bold rounded-full border border-brand-300/50 text-brand-700 dark:text-brand-300 hover:bg-brand-300/20 transition-all active:scale-95 flex items-center gap-1.5 shadow-sm">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+          </svg>
+          <span id="adminBtnText">Admin CMS</span>
+        </button>
+
+        <!-- GitHub Repo Button -->
+        <a href="https://github.com" id="githubRepoLink" target="_blank" class="hidden sm:flex p-2.5 text-brand-700 dark:text-brand-300 border border-brand-300/40 rounded-full hover:bg-brand-300/20 transition-all active:scale-95 shadow-sm items-center justify-center" title="GitHub Profile">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+        </a>
+
+        <!-- Contact CTA Button -->
+        <a href="#contact" class="px-4 py-2 text-xs font-bold rounded-full bg-brand-700 dark:bg-brand-500 text-white hover:bg-brand-800 dark:hover:bg-brand-600 transition-all active:scale-95 shadow-md">
+          Kontak Saya
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-700 dark:text-gray-200">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-brand-300/20 bg-pastelBg dark:bg-darkBg px-6 py-4 space-y-3 font-semibold text-xs text-gray-700 dark:text-gray-200">
+      <a href="#about" onclick="toggleMobileMenu()" class="block py-1 hover:text-brand-600">Tentang Saya</a>
+      <a href="#services" onclick="toggleMobileMenu()" class="block py-1 hover:text-brand-600">Layanan</a>
+      <a href="#experience" onclick="toggleMobileMenu()" class="block py-1 hover:text-brand-600">Pengalaman</a>
+      <a href="#skills" onclick="toggleMobileMenu()" class="block py-1 hover:text-brand-600">Keahlian Utama</a>
+      <a href="#projects" onclick="toggleMobileMenu()" class="block py-1 hover:text-brand-600">Proyek Unggulan</a>
+      <a href="#hobbies" onclick="toggleMobileMenu()" class="block py-1 hover:text-brand-600">Hobi & Ketertarikan</a>
+    </div>
+  </header>
+
+  <main class="flex-grow space-y-20 pb-20">
+    
+    <!-- HERO SECTION -->
+    <section class="relative pt-12 lg:pt-20 pb-16 hero-gradient border-b border-brand-300/20 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Hero Text -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left z-10">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-100 dark:bg-brand-900/60 border border-brand-300/50 text-brand-700 dark:text-brand-300 text-xs font-bold shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            <span id="displayStatus">Tersedia untuk Proyek & Freelance</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-gray-900 dark:text-white">
+            Merancang Antarmuka <span class="highlight-text-accent">Mobile & Web</span> yang Simpel & Indah.
+          </h1>
+
+          <p id="displayBio" class="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            Halo! Saya <strong id="displayName" class="text-brand-700 dark:text-brand-300">Reinhart Jeep</strong>, seorang <span id="displayRole" class="font-semibold text-gray-800 dark:text-gray-100">UI/UX & Mobile Developer</span>. Saya fokus menciptakan aplikasi seluler dan platform web performan tinggi dengan visual tenang berbasis warna pastel.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="#projects" class="px-7 py-3.5 rounded-2xl bg-brand-700 dark:bg-brand-500 text-white text-sm font-bold shadow-md hover:bg-brand-800 dark:hover:bg-brand-600 hover:shadow-lg active:scale-95 transition-all">
+              Lihat Portfolio Proyek
+            </a>
+            <button onclick="downloadCV()" class="px-7 py-3.5 rounded-2xl bg-pastelCard dark:bg-slate-800 text-brand-700 dark:text-brand-300 text-sm font-bold border border-brand-300/40 hover:bg-brand-300/20 active:scale-95 transition-all flex items-center gap-2 shadow-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h55.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              Unduh Ringkasan CV
+            </button>
+          </div>
+
+          <!-- Quick Stats Row -->
+          <div class="pt-8 border-t border-brand-300/20 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0">
+            <div class="spotlight-card p-4 rounded-2xl bg-white/70 dark:bg-slate-800/70 border border-brand-300/30 text-center shadow-sm">
+              <p id="statYears" class="text-2xl lg:text-3xl font-black text-brand-700 dark:text-brand-300">3+</p>
+              <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 mt-1">Tahun Pengalaman</p>
+            </div>
+            <div class="spotlight-card p-4 rounded-2xl bg-white/70 dark:bg-slate-800/70 border border-brand-300/30 text-center shadow-sm">
+              <p id="statProjects" class="text-2xl lg:text-3xl font-black text-brand-700 dark:text-brand-300">24+</p>
+              <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 mt-1">Proyek Selesai</p>
+            </div>
+            <div class="spotlight-card p-4 rounded-2xl bg-white/70 dark:bg-slate-800/70 border border-brand-300/30 text-center shadow-sm">
+              <p id="statFocus" class="text-2xl lg:text-3xl font-black text-brand-700 dark:text-brand-300">100%</p>
+              <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 mt-1">Fokus Quality & UX</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Hero Visual / Avatar Card -->
+        <div class="lg:col-span-5 flex justify-center z-10">
+          <div class="relative w-full max-w-md spotlight-card p-6 sm:p-8 rounded-3xl bg-white/80 dark:bg-slate-800/90 border border-brand-300/30 shadow-xl text-center">
+            
+            <div class="relative w-36 h-36 mx-auto mb-6">
+              <div class="w-full h-full rounded-full bg-amber-50 p-1 shadow-md border-4 border-brand-300 overflow-hidden flex items-center justify-center avatar-glow">
+                <!-- SVG Avatar Illustration -->
+                <svg viewBox="0 0 120 120" class="w-full h-full rounded-full object-cover">
+                  <circle cx="60" cy="60" r="60" fill="#FDF8F2" />
+                  <path d="M 25 105 C 25 85, 95 85, 95 105 L 95 120 L 25 120 Z" fill="#4E8D88" />
+                  <path d="M 27 92 C 40 86, 80 86, 93 92 L 95 100 C 80 94, 40 94, 25 100 Z" fill="#FFFFFF" />
+                  <rect x="52" y="70" width="16" height="20" rx="4" fill="#FED7AA" />
+                  <ellipse cx="60" cy="58" rx="22" ry="24" fill="#FED7AA" />
+                  <path d="M 38 46 C 35 30, 50 25, 60 28 C 70 25, 85 30, 82 46 C 85 52, 80 60, 78 62 C 78 50, 75 42, 60 40 C 45 42, 42 50, 42 62 C 40 60, 35 52, 38 46 Z" fill="#3A2213" />
+                  <circle cx="48" cy="56" r="8" fill="#FFFFFF" stroke="#1A202C" stroke-width="2" />
+                  <circle cx="49" cy="56" r="3" fill="#1A202C" />
+                  <circle cx="72" cy="56" r="8" fill="#FFFFFF" stroke="#1A202C" stroke-width="2" />
+                  <circle cx="71" cy="56" r="3" fill="#1A202C" />
+                  <path d="M 52 69 Q 60 76 68 69" fill="none" stroke="#1A202C" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </div>
+              <span class="absolute bottom-2 right-2 w-6 h-6 bg-emerald-500 border-4 border-white dark:border-slate-800 rounded-full" title="Status: Online & Siap Kolaborasi"></span>
+            </div>
+
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">Reinhart Jeep</h3>
+            <p class="text-xs font-semibold text-brand-700 dark:text-brand-300 uppercase tracking-widest mb-4">Mobile & Web Specialist</p>
+
+            <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-6">
+              "Desain yang baik bukan hanya tentang bagaimana sesuatu terlihat, melainkan bagaimana sesuatu bekerja dengan mulus di tangan pengguna."
+            </p>
+
+            <!-- Floating Tech Badges -->
+            <div class="flex flex-wrap justify-center gap-2 pt-2 border-t border-brand-300/20">
+              <span class="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-teal-50 dark:bg-slate-700 text-brand-700 dark:text-brand-300">Flutter</span>
+              <span class="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-teal-50 dark:bg-slate-700 text-brand-700 dark:text-brand-300">Figma UI/UX</span>
+              <span class="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-teal-50 dark:bg-slate-700 text-brand-700 dark:text-brand-300">Tailwind CSS</span>
+              <span class="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-teal-50 dark:bg-slate-700 text-brand-700 dark:text-brand-300">React/JS</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="p-8 lg:p-12 rounded-3xl bg-white dark:bg-slate-800/90 border border-brand-300/30 shadow-md spotlight-card grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-4 space-y-2">
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-700 dark:text-brand-300">Siapa Saya</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white">Dedikasi Pada Antarmuka Bermutu</h2>
+        </div>
+        <div class="lg:col-span-8">
+          <p id="displayAbout" class="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+            Halo! Saya Reinhart. Saya berdedikasi menciptakan pengalaman digital yang responsif di perangkat genggam dan desktop. Fokus utama saya adalah performa cepat, estetika warna pastel yang tenang, arsitektur kode bersih, dan navigasi ramah pengguna.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES / WHAT I DO SECTION -->
+    <section id="services" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="text-center space-y-2 max-w-2xl mx-auto">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-700 dark:text-brand-300">Solusi & Layanan</span>
+        <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white">Layanan Utama Yang Saya Tawarkan</h2>
+        <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Dari konsep wireframe hingga aplikasi seluler siap rilis.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Service 1 -->
+        <div class="spotlight-card p-6 rounded-3xl bg-white dark:bg-slate-800 border border-brand-300/30 shadow-sm space-y-3 hover:-translate-y-1 transition-all duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-brand-100 dark:bg-slate-700 text-brand-700 dark:text-brand-300 flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          </div>
+          <h3 class="font-bold text-base text-gray-900 dark:text-white">Mobile App Development</h3>
+          <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Membangun aplikasi Android & iOS responsif dengan Flutter / Native UI yang cepat dan fluid.</p>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="spotlight-card p-6 rounded-3xl bg-white dark:bg-slate-800 border border-brand-300/30 shadow-sm space-y-3 hover:-translate-y-1 transition-all duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-brand-100 dark:bg-slate-700 text-brand-700 dark:text-brand-300 flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+          </div>
+          <h3 class="font-bold text-base text-gray-900 dark:text-white">UI/UX & Design System</h3>
+          <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Merancang prototype interaktif, wireframe intuitif, dan design system berstandar tinggi.</p>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="spotlight-card p-6 rounded-3xl bg-white dark:bg-slate-800 border border-brand-300/30 shadow-sm space-y-3 hover:-translate-y-1 transition-all duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-brand-100 dark:bg-slate-700 text-brand-700 dark:text-brand-300 flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          </div>
+          <h3 class="font-bold text-base text-gray-900 dark:text-white">Frontend Web Development</h3>
+          <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Pengembangan website responsif, landing page optimasi SEO, dan dashboard interaktif.</p>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="spotlight-card p-6 rounded-3xl bg-white dark:bg-slate-800 border border-brand-300/30 shadow-sm space-y-3 hover:-translate-y-1 transition-all duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-brand-100 dark:bg-slate-700 text-brand-700 dark:text-brand-300 flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h3 class="font-bold text-base text-gray-900 dark:text-white">Optimasi Performa UX</h3>
+          <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Audit usabilitas antarmuka, perbaikan aksesibilitas, dan akselerasi waktu muat aplikasi.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE TIMELINE SECTION -->
+    <section id="experience" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-brand-300/20 pb-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-700 dark:text-brand-300">Karir & Pendidikan</span>
+          <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white">Pengalaman Kerja</h2>
+        </div>
+        <p class="text-xs text-gray-500 dark:text-gray-400 max-w-xs">Perjalanan profesional dalam merancang dan mengembangkan produk digital.</p>
+      </div>
+
+      <div class="relative border-l-2 border-brand-300/40 dark:border-slate-700 ml-4 md:ml-8 space-y-8 pl-6 md:pl-10">
+        <!-- Item 1 -->
+        <div class="relative group">
+          <span class="absolute -left-[31px] md:-left-[47px] top-1 w-5 h-5 rounded-full bg-brand-500 border-4 border-white dark:border-slate-900"></span>
+          <div class="spotlight-card p-6 rounded-3xl bg-white dark:bg-slate-800 border border-brand-300/30 shadow-sm space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="font-bold text-base text-gray-900 dark:text-white">Senior UI/UX & Mobile Developer</h3>
+              <span class="px-3 py-1 rounded-full bg-brand-100 text-brand-700 dark:bg-slate-700 dark:text-brand-300 text-[11px] font-bold">2023 - Sekarang</span>
+            </div>
+            <p class="text-xs font-semibold text-brand-600 dark:text-brand-300">Studio Inovasi Digital</p>
+            <p class="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">Memimpin tim frontend dalam merancang dan merilis 10+ aplikasi seluler Android & iOS dengan arsitektur Flutter modular serta integrasi API waktu nyata.</p>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="relative group">
+          <span class="absolute -left-[31px] md:-left-[47px] top-1 w-5 h-5 rounded-full bg-brand-300 border-4 border-white dark:border-slate-900"></span>
+          <div class="spotlight-card p-6 rounded-3xl bg-white dark:bg-slate-800 border border-brand-300/30 shadow-sm space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="font-bold text-base text-gray-900 dark:text-white">UI/UX Designer & Frontend Specialist</h3>
+              <span class="px-3 py-1 rounded-full bg-brand-100 text-brand-700 dark:bg-slate-700 dark:text-brand-300 text-[11px] font-bold">2021 - 2023</span>
+            </div>
+            <p class="text-xs font-semibold text-brand-600 dark:text-brand-300">Creative Tech Agency</p>
+            <p class="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">Merancang skema desain pastel modern, melakukan pengujian usabilitas pengguna, serta membangun landing page responsif menggunakan Tailwind CSS.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="text-center space-y-2 max-w-2xl mx-auto">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-700 dark:text-brand-300">Stack Teknologi</span>
+        <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white">Keahlian & Perkakas</h2>
+      </div>
+
+      <div id="skillsContainer" class="flex flex-wrap justify-center gap-3">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- PROJECTS SHOWCASE SECTION -->
+    <section id="projects" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-brand-300/20 pb-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-700 dark:text-brand-300">Portfolio pilihan</span>
+          <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white">Proyek Unggulan</h2>
+        </div>
+        <span id="projectCountBadge" class="text-xs font-bold px-3 py-1 rounded-full bg-brand-100 text-brand-700 dark:bg-slate-800 dark:text-brand-300">0 Proyek Ditemukan</span>
+      </div>
+
+      <!-- Search & Filter Controls -->
+      <div class="grid md:grid-cols-12 gap-4 items-center">
+        <!-- Category Filter Pills -->
+        <div class="md:col-span-7 flex flex-wrap gap-2 text-xs font-semibold">
+          <button onclick="setProjectCategory('ALL')" id="filter-ALL" class="project-filter-btn px-4 py-2 rounded-xl bg-brand-700 text-white shadow-sm">Semua</button>
+          <button onclick="setProjectCategory('MOBILE')" id="filter-MOBILE" class="project-filter-btn px-4 py-2 rounded-xl bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-200 border border-brand-300/30 hover:bg-brand-100">Mobile</button>
+          <button onclick="setProjectCategory('WEB')" id="filter-WEB" class="project-filter-btn px-4 py-2 rounded-xl bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-200 border border-brand-300/30 hover:bg-brand-100">Web App</button>
+          <button onclick="setProjectCategory('UI/UX')" id="filter-UI/UX" class="project-filter-btn px-4 py-2 rounded-xl bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-200 border border-brand-300/30 hover:bg-brand-100">UI/UX Design</button>
+        </div>
+
+        <!-- Search Bar Input -->
+        <div class="md:col-span-5 relative">
+          <input type="text" id="projectSearchInput" oninput="handleProjectSearch(event)" placeholder="Cari proyek (judul, deskripsi, tag)..." class="w-full px-4 py-2.5 pl-10 text-xs rounded-2xl border border-brand-300/40 bg-white dark:bg-slate-800 text-gray-800 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-sm">
+          <svg class="w-4 h-4 text-gray-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+      </div>
+
+      <!-- Project Cards Grid -->
+      <div id="projectsContainer" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dynamic Cards -->
+      </div>
+    </section>
+
+    <!-- HOBBIES SECTION -->
+    <section id="hobbies" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="text-center space-y-2 max-w-2xl mx-auto">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-700 dark:text-brand-300">Di Luar Pekerjaan</span>
+        <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white">Hobi & Ketertarikan</h2>
+      </div>
+
+      <div id="hobbiesContainer" class="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <!-- Dynamic Cards -->
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="spotlight-card p-8 lg:p-12 rounded-3xl bg-brand-700 dark:bg-brand-900 text-white shadow-xl grid md:grid-cols-12 gap-8 items-center">
+        
+        <div class="md:col-span-5 space-y-4 z-10">
+          <span class="px-3 py-1 rounded-full bg-brand-600 text-teal-100 text-xs font-bold inline-block">Mulai Berdiskusi</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Tertarik Bekerja Sama?</h2>
+          <p class="text-xs sm:text-sm text-teal-100 leading-relaxed">
+            Saya selalu terbuka untuk mendiskusikan aplikasi baru, kolaborasi desain antarmuka, atau tawaran posisi full-time / freelance.
+          </p>
+
+          <div class="pt-4 space-y-3">
+            <div class="flex items-center gap-3 text-xs text-teal-100">
+              <div class="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              </div>
+              <span id="displayContactEmail" class="font-semibold">reinhart.jeep@example.com</span>
+              <button onclick="copyEmailToClipboard()" class="ml-auto px-2.5 py-1 rounded-lg bg-brand-600 hover:bg-brand-500 text-[10px] font-bold">Salin</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form Simulation -->
+        <div class="md:col-span-7 z-10">
+          <form onsubmit="handleContactFormSubmit(event)" class="p-6 rounded-2xl bg-white text-gray-800 space-y-4 shadow-lg">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Nama Lengkap</label>
+                <input type="text" id="contactName" required placeholder="Nama Anda" class="w-full px-3.5 py-2 text-xs rounded-xl border border-gray-200 focus:outline-none focus:border-brand-500">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Email Anda</label>
+                <input type="email" id="contactEmail" required placeholder="email@domain.com" class="w-full px-3.5 py-2 text-xs rounded-xl border border-gray-200 focus:outline-none focus:border-brand-500">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Pesan / Detail Proyek</label>
+              <textarea id="contactMessage" rows="3" required placeholder="Tuliskan pesan atau gambaran proyek Anda..." class="w-full px-3.5 py-2 text-xs rounded-xl border border-gray-200 focus:outline-none focus:border-brand-500"></textarea>
+            </div>
+            <button type="submit" class="w-full py-3 rounded-xl bg-brand-700 text-white font-bold text-xs hover:bg-brand-800 active:scale-95 transition-all shadow-md">
+              Kirim Pesan Sekarang
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="w-full border-t border-brand-300/20 bg-white/50 dark:bg-slate-900/50 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-sm text-brand-700 dark:text-brand-300">Reinhart Jeep</span>
+        <span class="text-xs text-gray-400">| Portfolio & Content Management System</span>
+      </div>
+
+      <div id="socialsContainer" class="flex items-center gap-3">
+        <!-- Dynamic Social Icons -->
+      </div>
+
+      <p class="text-xs text-gray-400">
+        &copy; 2026 Reinhart Jeep. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ADMIN CMS MODAL OVERLAY -->
+  <div id="adminModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    
+    <!-- LOGIN VIEW -->
+    <div id="loginView" class="bg-white dark:bg-slate-800 w-full max-w-sm rounded-3xl p-6 shadow-2xl border border-brand-300/30 space-y-5">
+      <div class="flex justify-between items-center border-b border-gray-100 dark:border-slate-700 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          </div>
+          <h3 class="font-bold text-sm text-gray-800 dark:text-white">Login Admin CMS</h3>
+        </div>
+        <button onclick="toggleAdminModal()" class="text-gray-400 hover:text-gray-600 p-1">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <form onsubmit="handleLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Username</label>
+          <input type="text" id="usernameInput" required placeholder="admin" class="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 dark:border-slate-600 dark:bg-slate-700 focus:outline-none focus:border-brand-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Password</label>
+          <input type="password" id="passwordInput" required placeholder="••••••••" class="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 dark:border-slate-600 dark:bg-slate-700 focus:outline-none focus:border-brand-500">
+        </div>
+        <p id="loginError" class="text-[11px] text-red-500 hidden font-medium text-center">Username atau password salah!</p>
+        <button type="submit" class="w-full py-2.5 rounded-xl bg-brand-700 text-white text-xs font-bold hover:bg-brand-800 active:scale-95 transition-all shadow-md">
+          Masuk ke Dashboard
+        </button>
+      </form>
+      <div class="text-center pt-2 border-t border-gray-50 dark:border-slate-700">
+        <p class="text-[10px] text-gray-400">Default: <span class="font-semibold text-gray-600 dark:text-gray-200">admin</span> | <span class="font-semibold text-gray-600 dark:text-gray-200">admin123</span></p>
+      </div>
+    </div>
+
+    <!-- CMS DASHBOARD VIEW -->
+    <div id="cmsView" class="bg-white dark:bg-slate-800 w-full max-w-2xl max-h-[85vh] rounded-3xl p-6 shadow-2xl border border-brand-300/30 flex flex-col hidden">
+      
+      <!-- CMS Header -->
+      <div class="flex justify-between items-center border-b border-gray-100 dark:border-slate-700 pb-3 flex-shrink-0">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+          <h3 class="font-bold text-sm text-gray-800 dark:text-white">Admin Portfolio Manager</h3>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="handleLogout()" class="px-3 py-1 text-[11px] font-bold text-red-600 bg-red-50 dark:bg-red-950/40 rounded-lg hover:bg-red-100 transition-all">
+            Logout
+          </button>
+          <button onclick="toggleAdminModal()" class="text-gray-400 hover:text-gray-600 p-1">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- CMS Tabs -->
+      <div class="flex gap-1 border-b border-gray-100 dark:border-slate-700 my-3 flex-shrink-0 text-xs overflow-x-auto pb-1">
+        <button onclick="switchTab('profileTab')" id="tab-profileTab" class="cms-tab px-3.5 py-1.5 rounded-xl font-bold bg-brand-700 text-white">Profil</button>
+        <button onclick="switchTab('hobbiesTab')" id="tab-hobbiesTab" class="cms-tab px-3.5 py-1.5 rounded-xl font-bold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700">Hobi</button>
+        <button onclick="switchTab('projectsTab')" id="tab-projectsTab" class="cms-tab px-3.5 py-1.5 rounded-xl font-bold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700">Proyek</button>
+        <button onclick="switchTab('socialsTab')" id="tab-socialsTab" class="cms-tab px-3.5 py-1.5 rounded-xl font-bold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700">Socials</button>
+        <button onclick="switchTab('githubTab')" id="tab-githubTab" class="cms-tab px-3.5 py-1.5 rounded-xl font-bold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700">GitHub Sync</button>
+      </div>
+
+      <!-- CMS Tab Contents -->
+      <div class="flex-1 overflow-y-auto pr-1 space-y-4 text-xs">
+        
+        <!-- Tab 1: Profile & Stats -->
+        <div id="profileTab" class="tab-content space-y-3">
+          <div>
+            <label class="block font-bold text-gray-700 dark:text-gray-200 mb-1">Nama Lengkap</label>
+            <input type="text" id="editName" class="w-full p-2 border rounded-xl text-xs dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 dark:text-gray-200 mb-1">Role / Subtitle</label>
+            <input type="text" id="editRole" class="w-full p-2 border rounded-xl text-xs dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 dark:text-gray-200 mb-1">Status Ketersediaan</label>
+            <input type="text" id="editStatus" class="w-full p-2 border rounded-xl text-xs dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 dark:text-gray-200 mb-1">Bio Singkat (Hero)</label>
+            <textarea id="editBio" rows="2" class="w-full p-2 border rounded-xl text-xs dark:bg-slate-700 dark:border-slate-600 dark:text-white"></textarea>
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 dark:text-gray-200 mb-1">Deskripsi Tentang Saya</label>
+            <textarea id="editAbout" rows="3" class="w-full p-2 border rounded-xl text-xs dark:bg-slate-700 dark:border-slate-600 dark:text-white"></textarea>
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 dark:text-gray-200 mb-1">Email Kontak</label>
+            <input type="email" id="editEmail" class="w-full p-2 border rounded-xl text-xs dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+          </div>
+          <div class="grid grid-cols-3 gap-2 pt-1">
+            <div>
+              <label class="block font-bold text-gray-700 dark:text-gray-200 mb-1">Thn Pengalaman</label>
+              <input type="text" id="editStatYears" class="w-full p-2 border rounded-xl text-xs text-center dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+            </div>
+            <div>
+              <label class="block font-bold text-gray-700 dark:text-gray-200 mb-1">Jml Proyek</label>
+              <input type="text" id="editStatProjects" class="w-full p-2 border rounded-xl text-xs text-center dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+            </div>
+            <div>
+              <label class="block font-bold text-gray-700 dark:text-gray-200 mb-1">Fokus Quality</label>
+              <input type="text" id="editStatFocus" class="w-full p-2 border rounded-xl text-xs text-center dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+            </div>
+          </div>
+          <button onclick="saveProfileChanges()" class="w-full py-2.5 bg-brand-700 text-white font-bold rounded-xl hover:bg-brand-800 mt-2">
+            Simpan Perubahan Profil
+          </button>
+        </div>
+
+        <!-- Tab 2: Hobbies -->
+        <div id="hobbiesTab" class="tab-content space-y-3 hidden">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-bold text-gray-700 dark:text-gray-200">Daftar Hobi</span>
+            <button onclick="openHobbyForm()" class="px-3 py-1 bg-brand-700 text-white rounded-lg font-bold text-xs">+ Tambah Hobi</button>
+          </div>
+          <div id="cmsHobbiesList" class="space-y-2">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Tab 3: Projects -->
+        <div id="projectsTab" class="tab-content space-y-3 hidden">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-bold text-gray-700 dark:text-gray-200">Daftar Proyek</span>
+            <button onclick="openProjectForm()" class="px-3 py-1 bg-brand-700 text-white rounded-lg font-bold text-xs">+ Tambah Proyek</button>
+          </div>
+          <div id="cmsProjectsList" class="space-y-2">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Tab 4: Social Links -->
+        <div id="socialsTab" class="tab-content space-y-3 hidden">
+          <div>
+            <label class="block font-bold text-gray-700 dark:text-gray-200 mb-1">LinkedIn URL</label>
+            <input type="url" id="editLinkedin" class="w-full p-2 border rounded-xl text-xs dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 dark:text-gray-200 mb-1">GitHub URL</label>
+            <input type="url" id="editGithub" class="w-full p-2 border rounded-xl text-xs dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 dark:text-gray-200 mb-1">Instagram URL</label>
+            <input type="url" id="editInstagram" class="w-full p-2 border rounded-xl text-xs dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 dark:text-gray-200 mb-1">Dribbble URL</label>
+            <input type="url" id="editDribbble" class="w-full p-2 border rounded-xl text-xs dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+          </div>
+          <button onclick="saveSocialChanges()" class="w-full py-2.5 bg-brand-700 text-white font-bold rounded-xl hover:bg-brand-800 mt-2">
+            Simpan Perubahan Socials
+          </button>
+        </div>
+
+        <!-- Tab 5: GitHub JSON Sync -->
+        <div id="githubTab" class="tab-content space-y-3 hidden">
+          <div class="p-3 bg-brand-50 dark:bg-slate-700 border border-brand-300/40 rounded-2xl space-y-1">
+            <h4 class="font-bold text-brand-700 dark:text-brand-300">Integrasi Repositori GitHub Pages</h4>
+            <p class="text-[11px] text-gray-600 dark:text-gray-300 leading-relaxed">
+              Website ini akan membaca file <code>data.json</code> secara otomatis di repositori GitHub Anda jika file tersebut tersedia.
+            </p>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="copyDataJSONToClipboard()" class="w-full py-2 bg-brand-100 hover:bg-brand-200 text-brand-800 font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 text-xs">
+              Salin `data.json` ke Clipboard
+            </button>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <button onclick="exportDataJSON()" class="w-full py-2.5 bg-brand-700 text-white font-bold rounded-xl hover:opacity-90 flex items-center justify-center gap-1">
+              Ekspor JSON
+            </button>
+            <label class="w-full py-2.5 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-slate-600 font-bold rounded-xl hover:bg-gray-200 flex items-center justify-center gap-1 cursor-pointer">
+              Impor JSON
+              <input type="file" accept=".json" onchange="importDataJSON(event)" class="hidden">
+            </label>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 dark:border-slate-700">
+            <button onclick="resetDataToDefault()" class="w-full py-2 bg-red-50 text-red-600 border border-red-200 font-bold rounded-xl hover:bg-red-100 transition-all text-xs">
+              Reset Data ke Pengaturan Awal
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-gray-900 text-white text-xs font-semibold px-5 py-3 rounded-2xl shadow-2xl opacity-0 transition-all pointer-events-none flex items-center gap-2">
+    <span id="toastMsg">Perubahan berhasil disimpan!</span>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'rj_portfolio_state_v2';
+
+    // Default Application Data Store
+    const defaultState = {
+      isAdmin: false,
+      isDarkMode: false,
+      profile: {
+        name: "Reinhart Jeep",
+        role: "UI/UX & Mobile Developer",
+        status: "Tersedia untuk Proyek & Freelance",
+        bio: "Halo! Saya Reinhart Jeep, seorang UI/UX & Mobile Developer. Saya fokus menciptakan aplikasi seluler dan platform web performan tinggi dengan visual tenang berbasis warna pastel.",
+        about: "Saya berdedikasi menciptakan pengalaman digital yang responsif di perangkat genggam dan desktop. Fokus utama saya adalah performa cepat, estetika warna pastel yang tenang, arsitektur kode bersih, dan navigasi ramah pengguna.",
+        email: "reinhart.jeep@example.com",
+        stats: {
+          years: "3+",
+          projects: "24+",
+          focus: "100%"
+        }
+      },
+      skills: ["Flutter", "Figma UI/UX", "Tailwind CSS", "JavaScript (ES6+)", "React.js", "Design System", "REST API", "Git & GitHub"],
+      hobbies: [
+        {
+          id: "h1",
+          title: "Nonton Film",
+          sub: "Serial Sci-Fi & Drama",
+          icon: "movie",
+          url: "https://netflix.com"
+        },
+        {
+          id: "h2",
+          title: "Bermain Game",
+          sub: "Indie & Strategy",
+          icon: "game",
+          url: "https://store.steampowered.com"
+        },
+        {
+          id: "h3",
+          title: "Nongkrong & Ngopi",
+          sub: "Eksplor Kafe Lokal",
+          icon: "coffee",
+          url: "https://maps.google.com"
+        }
+      ],
+      projects: [
+        {
+          id: "p1",
+          title: "Calm Wallet App",
+          category: "MOBILE",
+          desc: "Aplikasi pencatatan keuangan pribadi dengan antarmuka menenangkan dan navigasi intuitif.",
+          badgeText: "Aplikasi Finansial Mobile",
+          tags: ["Flutter", "UI/UX", "Mobile First"],
+          url: "https://github.com"
+        },
+        {
+          id: "p2",
+          title: "Pastel Brews Store",
+          category: "WEB",
+          desc: "Landing page e-commerce toko kopi lokal yang dioptimalkan untuk akses super cepat.",
+          badgeText: "E-Commerce Kopi",
+          tags: ["Tailwind CSS", "Web Design", "SEO"],
+          url: "https://github.com"
+        },
+        {
+          id: "p3",
+          title: "ZenTask Mobile Redesign",
+          category: "UI/UX",
+          desc: "Konsep ulang antarmuka aplikasi manajemen tugas harian berbasis pendekatan psikologi warna.",
+          badgeText: "UI/UX Design Concept",
+          tags: ["Figma", "Design System", "User Research"],
+          url: "https://github.com"
+        }
+      ],
+      socials: {
+        linkedin: "https://linkedin.com",
+        github: "https://github.com",
+        instagram: "https://instagram.com",
+        dribbble: "https://dribbble.com"
+      }
+    };
+
+    let state = loadState();
+    let projectSearchQuery = "";
+    let activeProjectCategory = "ALL";
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          return { ...defaultState, ...parsed, isAdmin: false };
+        }
+      } catch (e) {
+        console.error("Gagal memuat state lokal", e);
+      }
+      return JSON.parse(JSON.stringify(defaultState));
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        console.error("Gagal menyimpan state", e);
+      }
+    }
+
+    // Synchronize data.json if hosted on GitHub Pages
+    async function syncWithRepositoryJSON() {
+      try {
+        const response = await fetch('./data.json', { cache: 'no-cache' });
+        if (response.ok) {
+          const repoData = await response.json();
+          if (repoData && repoData.profile) {
+            const savedLocal = localStorage.getItem(STORAGE_KEY);
+            const localObj = savedLocal ? JSON.parse(savedLocal) : {};
+            state = { 
+              ...defaultState, 
+              ...repoData, 
+              isDarkMode: localObj.isDarkMode || false, 
+              isAdmin: localObj.isAdmin || false 
+            };
+            saveState();
+            renderApp();
+          }
+        }
+      } catch (err) {
+        // Silent fallback
+      }
+    }
+
+    function highlightSearchText(text, query) {
+      if (!query) return text;
+      const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`(${escapedQuery})`, 'gi');
+      return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+    }
+
+    // Render Main Application UI
+    function renderApp() {
+      // Profile Header & Hero
+      document.getElementById('displayName').innerText = state.profile.name;
+      document.getElementById('displayRole').innerText = state.profile.role;
+      document.getElementById('displayStatus').innerText = state.profile.status || "Tersedia untuk Proyek";
+      document.getElementById('displayBio').innerText = state.profile.bio;
+      document.getElementById('displayAbout').innerText = state.profile.about;
+      document.getElementById('displayContactEmail').innerText = state.profile.email;
+
+      // Stats
+      document.getElementById('statYears').innerText = state.profile.stats.years;
+      document.getElementById('statProjects').innerText = state.profile.stats.projects;
+      document.getElementById('statFocus').innerText = state.profile.stats.focus;
+
+      // Theme UI Toggle
+      if (state.isDarkMode) {
+        document.documentElement.classList.add('dark');
+        document.getElementById('themeIconMoon').classList.add('hidden');
+        document.getElementById('themeIconSun').classList.remove('hidden');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.getElementById('themeIconSun').classList.add('hidden');
+        document.getElementById('themeIconMoon').classList.remove('hidden');
+      }
+
+      // Admin Button Status
+      const adminBtnText = document.getElementById('adminBtnText');
+      if (state.isAdmin) {
+        adminBtnText.innerText = "CMS Dashboard (Aktif)";
+        document.getElementById('adminBtn').classList.add('bg-emerald-100', 'border-emerald-400', 'text-emerald-800');
+      } else {
+        adminBtnText.innerText = "Admin CMS";
+        document.getElementById('adminBtn').classList.remove('bg-emerald-100', 'border-emerald-400', 'text-emerald-800');
+      }
+
+      // Render Skills Badges
+      const skillsContainer = document.getElementById('skillsContainer');
+      skillsContainer.innerHTML = state.skills.map(skill => `
+        <span class="px-4 py-2 bg-white dark:bg-slate-800 border border-brand-300/30 rounded-xl text-xs font-bold text-gray-700 dark:text-gray-200 shadow-sm hover:border-brand-500 hover:scale-105 transition-all cursor-default">${skill}</span>
+      `).join('');
+
+      // Render Hobbies Cards
+      const hobbiesContainer = document.getElementById('hobbiesContainer');
+      hobbiesContainer.innerHTML = state.hobbies.map(h => {
+        let iconSvg = '';
+        if (h.icon === 'movie') {
+          iconSvg = `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="14" rx="2"></rect><polygon points="10,10 16,13 10,16" fill="currentColor"></polygon></svg>`;
+        } else if (h.icon === 'game') {
+          iconSvg = `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="3"></rect><path d="M6 12h4M8 10v4M15 11.5h.01M18 12.5h.01"></path></svg>`;
+        } else {
+          iconSvg = `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="2" x2="6" y2="4"></line><line x1="10" y1="2" x2="10" y2="4"></line><line x1="14" y1="2" x2="14" y2="4"></line></svg>`;
+        }
+
+        return `
+          <a href="${h.url || '#'}" target="_blank" class="p-6 rounded-3xl bg-white dark:bg-slate-800 border border-brand-300/30 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group relative spotlight-card">
+            ${state.isAdmin ? `<button onclick="event.preventDefault(); editHobby('${h.id}')" class="absolute top-3 right-3 px-2 py-1 bg-brand-100 rounded-lg text-brand-800 text-[10px] font-bold z-20">Edit</button>` : ''}
+            <div class="w-12 h-12 rounded-2xl bg-brand-100 dark:bg-slate-700 text-brand-700 dark:text-brand-300 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform z-10">
+              ${iconSvg}
+            </div>
+            <h3 class="text-sm font-bold text-gray-900 dark:text-white z-10">${h.title}</h3>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 z-10">${h.sub}</p>
+          </a>
+        `;
+      }).join('');
+
+      // Filter Projects
+      const filteredProjects = state.projects.filter(p => {
+        const matchesCategory = activeProjectCategory === 'ALL' || (p.category && p.category.toUpperCase() === activeProjectCategory);
+        if (!projectSearchQuery) return matchesCategory;
+        
+        const q = projectSearchQuery.toLowerCase();
+        const matchesQuery = p.title.toLowerCase().includes(q) ||
+                             p.desc.toLowerCase().includes(q) ||
+                             p.badgeText.toLowerCase().includes(q) ||
+                             p.tags.some(t => t.toLowerCase().includes(q));
+        return matchesCategory && matchesQuery;
+      });
+
+      document.getElementById('projectCountBadge').innerText = `${filteredProjects.length} Proyek Ditemukan`;
+
+      // Render Projects
+      const projectsContainer = document.getElementById('projectsContainer');
+      if (filteredProjects.length === 0) {
+        projectsContainer.innerHTML = `
+          <div class="sm:col-span-2 lg:col-span-3 p-12 text-center text-xs text-gray-400 bg-white/50 dark:bg-slate-800/50 rounded-3xl border border-dashed border-brand-300/40">
+            Tidak ada proyek yang sesuai dengan kriteria pencarian Anda.
+          </div>
+        `;
+      } else {
+        projectsContainer.innerHTML = filteredProjects.map(p => {
+          const highlightedTitle = highlightSearchText(p.title, projectSearchQuery);
+          const highlightedDesc = highlightSearchText(p.desc, projectSearchQuery);
+          const highlightedBadge = highlightSearchText(p.badgeText, projectSearchQuery);
+
+          return `
+            <article class="p-6 rounded-3xl bg-white dark:bg-slate-800 shadow-sm border border-brand-300/30 flex flex-col justify-between relative group spotlight-card hover:border-brand-500 hover:shadow-md transition-all">
+              ${state.isAdmin ? `<button onclick="editProject('${p.id}')" class="absolute top-4 right-4 px-2.5 py-1 bg-brand-100 rounded-lg text-brand-800 text-[10px] font-bold z-20">Edit</button>` : ''}
+              
+              <div class="space-y-4 z-10">
+                <div class="h-36 rounded-2xl bg-brand-100/70 dark:bg-slate-700/80 flex items-center justify-center text-brand-700 dark:text-brand-300 font-bold text-xs p-4 text-center group-hover:bg-brand-200/60 transition-colors">
+                  ${highlightedBadge}
+                </div>
+
+                <div class="space-y-1">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-bold text-base text-gray-900 dark:text-white">${highlightedTitle}</h3>
+                  </div>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">${highlightedDesc}</p>
+                </div>
+              </div>
+
+              <div class="space-y-3 pt-4 z-10">
+                <div class="flex flex-wrap gap-1.5">
+                  ${p.tags.map(t => `<span class="px-2.5 py-1 text-[10px] rounded-lg bg-brand-50 dark:bg-slate-700 text-brand-700 dark:text-brand-300 font-semibold">${highlightSearchText(t, projectSearchQuery)}</span>`).join('')}
+                </div>
+                ${p.url ? `<a href="${p.url}" target="_blank" class="inline-flex items-center gap-1 text-xs text-brand-700 dark:text-brand-300 font-bold hover:underline">Buka Tautan Proyek &rarr;</a>` : ''}
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+
+      // Render Social Links
+      const socialsContainer = document.getElementById('socialsContainer');
+      socialsContainer.innerHTML = `
+        <a href="${state.socials.linkedin}" target="_blank" aria-label="LinkedIn" class="p-2 rounded-full bg-brand-100 dark:bg-slate-800 text-brand-700 dark:text-brand-300 hover:bg-brand-700 hover:text-white transition-all">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+        </a>
+        <a href="${state.socials.github}" target="_blank" aria-label="GitHub" class="p-2 rounded-full bg-brand-100 dark:bg-slate-800 text-brand-700 dark:text-brand-300 hover:bg-brand-700 hover:text-white transition-all">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+        </a>
+        <a href="${state.socials.instagram}" target="_blank" aria-label="Instagram" class="p-2 rounded-full bg-brand-100 dark:bg-slate-800 text-brand-700 dark:text-brand-300 hover:bg-brand-700 hover:text-white transition-all">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      `;
+    }
+
+    function toggleDarkMode() {
+      state.isDarkMode = !state.isDarkMode;
+      saveState();
+      renderApp();
+      showToast(state.isDarkMode ? 'Mode Gelap Diaktifkan' : 'Mode Terang Diaktifkan');
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    function setProjectCategory(cat) {
+      activeProjectCategory = cat;
+      document.querySelectorAll('.project-filter-btn').forEach(btn => {
+        btn.classList.remove('bg-brand-700', 'text-white');
+        btn.classList.add('bg-white', 'dark:bg-slate-800', 'text-gray-700', 'dark:text-gray-200');
+      });
+      const activeBtn = document.getElementById(`filter-${cat}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-brand-700', 'text-white');
+        activeBtn.classList.remove('bg-white', 'dark:bg-slate-800', 'text-gray-700', 'dark:text-gray-200');
+      }
+      renderApp();
+    }
+
+    function handleProjectSearch(e) {
+      projectSearchQuery = e.target.value.toLowerCase().trim();
+      renderApp();
+    }
+
+    function toggleAdminModal() {
+      const modal = document.getElementById('adminModal');
+      const loginView = document.getElementById('loginView');
+      const cmsView = document.getElementById('cmsView');
+
+      if (modal.classList.contains('hidden')) {
+        modal.classList.remove('hidden');
+        if (state.isAdmin) {
+          loginView.classList.add('hidden');
+          cmsView.classList.remove('hidden');
+          populateCMSInputs();
+          renderCMSLists();
+        } else {
+          loginView.classList.remove('hidden');
+          cmsView.classList.add('hidden');
+        }
+      } else {
+        modal.classList.add('hidden');
+      }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('usernameInput').value;
+      const pass = document.getElementById('passwordInput').value;
+      const errorMsg = document.getElementById('loginError');
+
+      if (user === 'admin' && pass === 'admin123') {
+        state.isAdmin = true;
+        errorMsg.classList.add('hidden');
+        document.getElementById('loginView').classList.add('hidden');
+        document.getElementById('cmsView').classList.remove('hidden');
+        
+        populateCMSInputs();
+        renderCMSLists();
+        renderApp();
+        showToast('Login Admin Berhasil!');
+      } else {
+        errorMsg.classList.remove('hidden');
+      }
+    }
+
+    function handleLogout() {
+      state.isAdmin = false;
+      toggleAdminModal();
+      renderApp();
+      showToast('Logout Berhasil.');
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+      document.querySelectorAll('.cms-tab').forEach(btn => {
+        btn.classList.remove('bg-brand-700', 'text-white');
+        btn.classList.add('text-gray-600', 'dark:text-gray-300');
+      });
+
+      const activeTab = document.getElementById(tabId);
+      if (activeTab) activeTab.classList.remove('hidden');
+
+      const activeBtn = document.getElementById(`tab-${tabId}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-brand-700', 'text-white');
+        activeBtn.classList.remove('text-gray-600', 'dark:text-gray-300');
+      }
+    }
+
+    function populateCMSInputs() {
+      document.getElementById('editName').value = state.profile.name;
+      document.getElementById('editRole').value = state.profile.role;
+      document.getElementById('editStatus').value = state.profile.status || '';
+      document.getElementById('editBio').value = state.profile.bio;
+      document.getElementById('editAbout').value = state.profile.about;
+      document.getElementById('editEmail').value = state.profile.email;
+
+      document.getElementById('editStatYears').value = state.profile.stats.years;
+      document.getElementById('editStatProjects').value = state.profile.stats.projects;
+      document.getElementById('editStatFocus').value = state.profile.stats.focus;
+
+      document.getElementById('editLinkedin').value = state.socials.linkedin;
+      document.getElementById('editGithub').value = state.socials.github;
+      document.getElementById('editInstagram').value = state.socials.instagram;
+      document.getElementById('editDribbble').value = state.socials.dribbble;
+    }
+
+    function renderCMSLists() {
+      // Hobbies in CMS
+      const cmsHobbiesList = document.getElementById('cmsHobbiesList');
+      cmsHobbiesList.innerHTML = state.hobbies.map(h => `
+        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-700 rounded-xl border border-gray-100 dark:border-slate-600">
+          <div>
+            <p class="font-bold text-gray-800 dark:text-gray-100 text-xs">${h.title}</p>
+            <p class="text-[10px] text-gray-500 dark:text-gray-400">${h.sub}</p>
+          </div>
+          <div class="flex gap-1">
+            <button onclick="openHobbyForm('${h.id}')" class="px-2.5 py-1 bg-brand-100 text-brand-800 rounded-md font-bold text-[10px]">Edit</button>
+            <button onclick="deleteHobby('${h.id}')" class="px-2.5 py-1 bg-red-100 text-red-700 rounded-md font-bold text-[10px]">Hapus</button>
+          </div>
+        </div>
+      `).join('');
+
+      // Projects in CMS
+      const cmsProjectsList = document.getElementById('cmsProjectsList');
+      cmsProjectsList.innerHTML = state.projects.map(p => `
+        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-700 rounded-xl border border-gray-100 dark:border-slate-600">
+          <div class="truncate max-w-[240px]">
+            <p class="font-bold text-gray-800 dark:text-gray-100 text-xs truncate">${p.title}</p>
+            <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate">${p.badgeText}</p>
+          </div>
+          <div class="flex gap-1">
+            <button onclick="openProjectForm('${p.id}')" class="px-2.5 py-1 bg-brand-100 text-brand-800 rounded-md font-bold text-[10px]">Edit</button>
+            <button onclick="deleteProject('${p.id}')" class="px-2.5 py-1 bg-red-100 text-red-700 rounded-md font-bold text-[10px]">Hapus</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function saveProfileChanges() {
+      state.profile.name = document.getElementById('editName').value;
+      state.profile.role = document.getElementById('editRole').value;
+      state.profile.status = document.getElementById('editStatus').value;
+      state.profile.bio = document.getElementById('editBio').value;
+      state.profile.about = document.getElementById('editAbout').value;
+      state.profile.email = document.getElementById('editEmail').value;
+
+      state.profile.stats.years = document.getElementById('editStatYears').value;
+      state.profile.stats.projects = document.getElementById('editStatProjects').value;
+      state.profile.stats.focus = document.getElementById('editStatFocus').value;
+
+      saveState();
+      renderApp();
+      showToast('Profil berhasil diperbarui!');
+    }
+
+    function saveSocialChanges() {
+      state.socials.linkedin = document.getElementById('editLinkedin').value;
+      state.socials.github = document.getElementById('editGithub').value;
+      state.socials.instagram = document.getElementById('editInstagram').value;
+      state.socials.dribbble = document.getElementById('editDribbble').value;
+
+      saveState();
+      renderApp();
+      showToast('Tautan Socials diperbarui!');
+    }
+
+    function openHobbyForm(id = null) {
+      const item = id ? state.hobbies.find(h=>h.id===id) : null;
+      const title = prompt('Judul Hobi:', item ? item.title : '');
+      if (title === null) return;
+      
+      const sub = prompt('Deskripsi Singkat:', item ? item.sub : '');
+      const url = prompt('Link URL Hobi (https://...):', item ? item.url : '');
+
+      if (id && item) {
+        item.title = title || item.title;
+        item.sub = sub || item.sub;
+        item.url = url || item.url;
+      } else {
+        state.hobbies.push({
+          id: 'h' + Date.now(),
+          title: title || 'Hobi Baru',
+          sub: sub || 'Aktivitas Hobi',
+          icon: 'coffee',
+          url: url || '#'
+        });
+      }
+
+      saveState();
+      renderCMSLists();
+      renderApp();
+      showToast('Data Hobi diperbarui!');
+    }
+
+    function editHobby(id) {
+      if (!state.isAdmin) return toggleAdminModal();
+      openHobbyForm(id);
+    }
+
+    function deleteHobby(id) {
+      state.hobbies = state.hobbies.filter(h => h.id !== id);
+      saveState();
+      renderCMSLists();
+      renderApp();
+      showToast('Hobi dihapus.');
+    }
+
+    function openProjectForm(id = null) {
+      const item = id ? state.projects.find(p=>p.id===id) : null;
+      const title = prompt('Judul Proyek:', item ? item.title : '');
+      if (title === null) return;
+
+      const desc = prompt('Deskripsi Proyek:', item ? item.desc : '');
+      const badgeText = prompt('Banner / Category Text:', item ? item.badgeText : '');
+      const category = prompt('Kategori Filter (MOBILE / WEB / UI/UX):', item ? (item.category || 'MOBILE') : 'MOBILE');
+      const url = prompt('URL Proyek (https://...):', item ? item.url : '');
+
+      if (id && item) {
+        item.title = title || item.title;
+        item.desc = desc || item.desc;
+        item.badgeText = badgeText || item.badgeText;
+        item.category = (category || 'MOBILE').toUpperCase();
+        item.url = url || item.url;
+      } else {
+        state.projects.unshift({
+          id: 'p' + Date.now(),
+          title: title || 'Proyek Baru',
+          category: (category || 'MOBILE').toUpperCase(),
+          desc: desc || 'Deskripsi proyek baru.',
+          badgeText: badgeText || 'New Project',
+          tags: ['Mobile', 'UI/UX'],
+          url: url || '#'
+        });
+      }
+
+      saveState();
+      renderCMSLists();
+      renderApp();
+      showToast('Data Proyek diperbarui!');
+    }
+
+    function editProject(id) {
+      if (!state.isAdmin) return toggleAdminModal();
+      openProjectForm(id);
+    }
+
+    function deleteProject(id) {
+      state.projects = state.projects.filter(p => p.id !== id);
+      saveState();
+      renderCMSLists();
+      renderApp();
+      showToast('Proyek dihapus.');
+    }
+
+    function exportDataJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+      const anchor = document.createElement('a');
+      anchor.setAttribute("href", dataStr);
+      anchor.setAttribute("download", `data.json`);
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      showToast('File data.json berhasil di-download!');
+    }
+
+    function copyDataJSONToClipboard() {
+      const copyObj = { ...state, isAdmin: false };
+      const jsonText = JSON.stringify(copyObj, null, 2);
+      
+      const textarea = document.createElement('textarea');
+      textarea.value = jsonText;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast('JSON berhasil disalin ke clipboard!');
+      } catch (err) {
+        showToast('Gagal menyalin text.');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function importDataJSON(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const importedData = JSON.parse(evt.target.result);
+          if (importedData && importedData.profile) {
+            state = { ...importedData, isAdmin: true };
+            saveState();
+            renderApp();
+            populateCMSInputs();
+            renderCMSLists();
+            showToast('Data JSON berhasil diimpor!');
+          }
+        } catch (err) {
+          showToast('Format JSON tidak valid!');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function resetDataToDefault() {
+      if (confirm('Kembalikan semua data ke pengaturan awal?')) {
+        state = JSON.parse(JSON.stringify(defaultState));
+        state.isAdmin = true;
+        saveState();
+        renderApp();
+        populateCMSInputs();
+        renderCMSLists();
+        showToast('Data dikembalikan ke pengaturan awal.');
+      }
+    }
+
+    function copyEmailToClipboard() {
+      const email = state.profile.email;
+      const textarea = document.createElement('textarea');
+      textarea.value = email;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(`Email ${email} disalin!`);
+      } catch (e) {
+        showToast('Gagal menyalin email.');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function downloadCV() {
+      showToast('Mengunduh ringkasan CV...');
+      // Simulated CV download action
+    }
+
+    function handleContactFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('contactName').value;
+      showToast(`Terima kasih, ${name}! Pesan Anda telah terkirim.`);
+      e.target.reset();
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').innerText = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 2500);
+    }
+
+    function initSpotlightListener() {
+      document.addEventListener('mousemove', (e) => {
+        document.querySelectorAll('.spotlight-card').forEach(card => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    }
+
+    window.onload = async function() {
+      renderApp();
+      initSpotlightListener();
+      await syncWithRepositoryJSON();
+    };
+  </script>
+</body>
+</html>
