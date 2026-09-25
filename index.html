@@ -250,8 +250,8 @@
             Merancang Antarmuka <span class="highlight-text-accent">Mobile & Web</span> yang Simpel & Indah.
           </h1>
 
-          <p id="displayBio" class="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-            Halo! Saya <strong id="displayName" class="text-brand-700 dark:text-brand-300">Reinhart Jeep</strong>, seorang <span id="displayRole" class="font-semibold text-gray-800 dark:text-gray-100">UI/UX & Mobile Developer</span>. Saya fokus menciptakan aplikasi seluler dan platform web performan tinggi dengan visual tenang berbasis warna pastel.
+          <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            Halo! Saya <strong id="displayName" class="text-brand-700 dark:text-brand-300">Reinhart Jeep</strong>, seorang <span id="displayRole" class="font-semibold text-gray-800 dark:text-gray-100">UI/UX & Mobile Developer</span>. <span id="displayBio">Saya fokus menciptakan aplikasi seluler dan platform web performan tinggi dengan visual tenang berbasis warna pastel.</span>
           </p>
 
           <!-- CTA Buttons -->
@@ -949,17 +949,42 @@
     // Render Main Application UI
     function renderApp() {
       // Profile Header & Hero
-      document.getElementById('displayName').innerText = state.profile.name;
-      document.getElementById('displayRole').innerText = state.profile.role;
-      document.getElementById('displayStatus').innerText = state.profile.status || "Tersedia untuk Proyek";
-      document.getElementById('displayBio').innerText = state.profile.bio;
-      document.getElementById('displayAbout').innerText = state.profile.about;
-      document.getElementById('displayContactEmail').innerText = state.profile.email;
+      const nameEl = document.getElementById('displayName');
+      if (nameEl) nameEl.innerText = state.profile.name;
+
+      const roleEl = document.getElementById('displayRole');
+      if (roleEl) roleEl.innerText = state.profile.role;
+
+      const statusEl = document.getElementById('displayStatus');
+      if (statusEl) statusEl.innerText = state.profile.status || "Tersedia untuk Proyek";
+
+      const bioEl = document.getElementById('displayBio');
+      if (bioEl) {
+        let bioText = state.profile.bio || "";
+        if (bioText.startsWith("Halo!")) {
+          const parts = bioText.split('. ');
+          if (parts.length > 1) {
+            bioText = parts.slice(1).join('. ');
+          }
+        }
+        bioEl.innerText = bioText;
+      }
+
+      const aboutEl = document.getElementById('displayAbout');
+      if (aboutEl) aboutEl.innerText = state.profile.about;
+
+      const contactEl = document.getElementById('displayContactEmail');
+      if (contactEl) contactEl.innerText = state.profile.email;
 
       // Stats
-      document.getElementById('statYears').innerText = state.profile.stats.years;
-      document.getElementById('statProjects').innerText = state.profile.stats.projects;
-      document.getElementById('statFocus').innerText = state.profile.stats.focus;
+      const statYearsEl = document.getElementById('statYears');
+      if (statYearsEl) statYearsEl.innerText = state.profile.stats.years;
+
+      const statProjectsEl = document.getElementById('statProjects');
+      if (statProjectsEl) statProjectsEl.innerText = state.profile.stats.projects;
+
+      const statFocusEl = document.getElementById('statFocus');
+      if (statFocusEl) statFocusEl.innerText = state.profile.stats.focus;
 
       // Theme UI Toggle
       if (state.isDarkMode) {
