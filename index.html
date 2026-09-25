@@ -45,6 +45,15 @@
     }
   </script>
   
+  <script type="importmap">
+    {
+      "imports": {
+        "firebase/app": "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js",
+        "firebase/firestore": "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
+      }
+    }
+  </script>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -741,7 +750,28 @@
     <span id="toastMsg">Perubahan berhasil disimpan!</span>
   </div>
 
-  <script>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "firebase/app";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+    import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "firebase/firestore";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDn4tV4uClqC4Gw7K-sEuOQOnQNIVRUPCE",
+      authDomain: "reinhart-s-portofolio.firebaseapp.com",
+      projectId: "reinhart-s-portofolio",
+      storageBucket: "reinhart-s-portofolio.firebasestorage.app",
+      messagingSenderId: "358969778933",
+      appId: "1:358969778933:web:c7f006c37fb03983acdbbc"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const portfolioDocRef = doc(db, "portfolio", "content");
+
     const STORAGE_KEY = 'rj_portfolio_state_v2';
 
     // Default Application Data Store
@@ -822,11 +852,7 @@
       }
     };
 
-    let state = loadState();
-    let projectSearchQuery = "";
-    let activeProjectCategory = "ALL";
-
-    function loadState() {
+    function loadInitialState() {
       try {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved) {
@@ -839,35 +865,77 @@
       return JSON.parse(JSON.stringify(defaultState));
     }
 
-    function saveState() {
+    let state = loadInitialState();
+    let projectSearchQuery = "";
+    let activeProjectCategory = "ALL";
+
+    // Simpan data portofolio ke Firebase Firestore
+    async function saveState() {
       try {
+        const dataToSave = {
+          profile: state.profile,
+          skills: state.skills,
+          hobbies: state.hobbies,
+          projects: state.projects,
+          socials: state.socials,
+          isDarkMode: state.isDarkMode
+        };
+        const cleanData = JSON.parse(JSON.stringify(dataToSave));
+        await setDoc(portfolioDocRef, cleanData);
+        // Tetap simpan salinan lokal sebagai cache offline cepat
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       } catch (e) {
-        console.error("Gagal menyimpan state", e);
+        console.error("Gagal menyimpan state ke Firestore", e);
       }
     }
 
-    // Synchronize data.json if hosted on GitHub Pages
-    async function syncWithRepositoryJSON() {
+    // Inisialisasi dan sinkronisasi realtime Firebase Firestore
+    async function initFirestoreSync() {
       try {
-        const response = await fetch('./data.json', { cache: 'no-cache' });
-        if (response.ok) {
-          const repoData = await response.json();
-          if (repoData && repoData.profile) {
-            const savedLocal = localStorage.getItem(STORAGE_KEY);
-            const localObj = savedLocal ? JSON.parse(savedLocal) : {};
-            state = { 
-              ...defaultState, 
-              ...repoData, 
-              isDarkMode: localObj.isDarkMode || false, 
-              isAdmin: localObj.isAdmin || false 
-            };
-            saveState();
-            renderApp();
+        // Cek dokumen di Firestore: jika ada, gunakan data Firestore.
+        // Jika belum ada di Firestore (misalnya setup awal), migrasikan data dari localStorage / defaultState ke Firestore.
+        const docSnap = await getDoc(portfolioDocRef);
+        if (docSnap.exists()) {
+          const firestoreData = docSnap.data();
+          state = {
+            ...defaultState,
+            ...firestoreData,
+            isAdmin: state.isAdmin,
+            isDarkMode: (firestoreData.isDarkMode !== undefined) ? firestoreData.isDarkMode : state.isDarkMode
+          };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          renderApp();
+          if (state.isAdmin) {
+            populateCMSInputs();
+            renderCMSLists();
           }
+        } else {
+          // Dokumen belum ada di Firestore: simpan data yang ada (migrasi dari localStorage) ke Firestore sekarang
+          console.log("Migrasi data portofolio dari lokal ke Firebase Firestore...");
+          await saveState();
         }
+
+        // Listener pembaruan realtime dari Firestore
+        onSnapshot(portfolioDocRef, (snap) => {
+          if (snap.exists()) {
+            const remoteData = snap.data();
+            state = {
+              ...defaultState,
+              ...remoteData,
+              isAdmin: state.isAdmin,
+              isDarkMode: (remoteData.isDarkMode !== undefined) ? remoteData.isDarkMode : state.isDarkMode
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            renderApp();
+            if (state.isAdmin) {
+              renderCMSLists();
+            }
+          }
+        }, (error) => {
+          console.warn("Firestore snapshot listener:", error);
+        });
       } catch (err) {
-        // Silent fallback
+        console.error("Gagal sinkronisasi Firestore:", err);
       }
     }
 
@@ -1016,10 +1084,10 @@
       `;
     }
 
-    function toggleDarkMode() {
+    async function toggleDarkMode() {
       state.isDarkMode = !state.isDarkMode;
-      saveState();
       renderApp();
+      await saveState();
       showToast(state.isDarkMode ? 'Mode Gelap Diaktifkan' : 'Mode Terang Diaktifkan');
     }
 
@@ -1163,7 +1231,7 @@
       `).join('');
     }
 
-    function saveProfileChanges() {
+    async function saveProfileChanges() {
       state.profile.name = document.getElementById('editName').value;
       state.profile.role = document.getElementById('editRole').value;
       state.profile.status = document.getElementById('editStatus').value;
@@ -1175,23 +1243,23 @@
       state.profile.stats.projects = document.getElementById('editStatProjects').value;
       state.profile.stats.focus = document.getElementById('editStatFocus').value;
 
-      saveState();
       renderApp();
+      await saveState();
       showToast('Profil berhasil diperbarui!');
     }
 
-    function saveSocialChanges() {
+    async function saveSocialChanges() {
       state.socials.linkedin = document.getElementById('editLinkedin').value;
       state.socials.github = document.getElementById('editGithub').value;
       state.socials.instagram = document.getElementById('editInstagram').value;
       state.socials.dribbble = document.getElementById('editDribbble').value;
 
-      saveState();
       renderApp();
+      await saveState();
       showToast('Tautan Socials diperbarui!');
     }
 
-    function openHobbyForm(id = null) {
+    async function openHobbyForm(id = null) {
       const item = id ? state.hobbies.find(h=>h.id===id) : null;
       const title = prompt('Judul Hobi:', item ? item.title : '');
       if (title === null) return;
@@ -1213,9 +1281,9 @@
         });
       }
 
-      saveState();
       renderCMSLists();
       renderApp();
+      await saveState();
       showToast('Data Hobi diperbarui!');
     }
 
@@ -1224,15 +1292,15 @@
       openHobbyForm(id);
     }
 
-    function deleteHobby(id) {
+    async function deleteHobby(id) {
       state.hobbies = state.hobbies.filter(h => h.id !== id);
-      saveState();
       renderCMSLists();
       renderApp();
+      await saveState();
       showToast('Hobi dihapus.');
     }
 
-    function openProjectForm(id = null) {
+    async function openProjectForm(id = null) {
       const item = id ? state.projects.find(p=>p.id===id) : null;
       const title = prompt('Judul Proyek:', item ? item.title : '');
       if (title === null) return;
@@ -1260,9 +1328,9 @@
         });
       }
 
-      saveState();
       renderCMSLists();
       renderApp();
+      await saveState();
       showToast('Data Proyek diperbarui!');
     }
 
@@ -1271,11 +1339,11 @@
       openProjectForm(id);
     }
 
-    function deleteProject(id) {
+    async function deleteProject(id) {
       state.projects = state.projects.filter(p => p.id !== id);
-      saveState();
       renderCMSLists();
       renderApp();
+      await saveState();
       showToast('Proyek dihapus.');
     }
 
@@ -1312,15 +1380,15 @@
       if (!file) return;
 
       const reader = new FileReader();
-      reader.onload = function(evt) {
+      reader.onload = async function(evt) {
         try {
           const importedData = JSON.parse(evt.target.result);
           if (importedData && importedData.profile) {
             state = { ...importedData, isAdmin: true };
-            saveState();
             renderApp();
             populateCMSInputs();
             renderCMSLists();
+            await saveState();
             showToast('Data JSON berhasil diimpor!');
           }
         } catch (err) {
@@ -1330,14 +1398,14 @@
       reader.readAsText(file);
     }
 
-    function resetDataToDefault() {
+    async function resetDataToDefault() {
       if (confirm('Kembalikan semua data ke pengaturan awal?')) {
         state = JSON.parse(JSON.stringify(defaultState));
         state.isAdmin = true;
-        saveState();
         renderApp();
         populateCMSInputs();
         renderCMSLists();
+        await saveState();
         showToast('Data dikembalikan ke pengaturan awal.');
       }
     }
@@ -1390,11 +1458,36 @@
       });
     }
 
-    window.onload = async function() {
-      renderApp();
-      initSpotlightListener();
-      await syncWithRepositoryJSON();
-    };
+    // Expose all interactive functions to window for HTML inline event handlers
+    Object.assign(window, {
+      toggleDarkMode,
+      toggleMobileMenu,
+      setProjectCategory,
+      handleProjectSearch,
+      toggleAdminModal,
+      handleLogin,
+      handleLogout,
+      switchTab,
+      saveProfileChanges,
+      saveSocialChanges,
+      openHobbyForm,
+      editHobby,
+      deleteHobby,
+      openProjectForm,
+      editProject,
+      deleteProject,
+      exportDataJSON,
+      copyDataJSONToClipboard,
+      importDataJSON,
+      resetDataToDefault,
+      copyEmailToClipboard,
+      downloadCV,
+      handleContactFormSubmit
+    });
+
+    renderApp();
+    initSpotlightListener();
+    initFirestoreSync();
   </script>
 </body>
 </html>
